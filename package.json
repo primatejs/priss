@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "bugs": "https://github.com/primatejs/priss/issues",
   "repository": "https://github.com/primatejs/priss",
-  "description": "Static site generator for Primate",
+  "description": "Primate static site generator",
   "license": "MIT",
   "bin": "src/bin.js",
   "dependencies": {
