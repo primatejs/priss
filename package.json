@@ -1,0 +1,25 @@
+{
+  "name": "priss",
+  "version": "0.1.0",
+  "bugs": "https://github.com/primatejs/priss/issues",
+  "repository": "https://github.com/primatejs/priss",
+  "description": "Static site generator for Primate",
+  "license": "MIT",
+  "bin": "src/bin.js",
+  "dependencies": {
+    "marked": "^4.3.0",
+    "primate": "^0.11.0",
+    "runtime-compat": "^0.14.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.21.3",
+    "@babel/eslint-parser": "^7.21.3",
+    "@babel/plugin-syntax-import-assertions": "^7.20.0",
+    "eslint": "^8.36.0",
+    "eslint-plugin-json": "^3.1.0"
+  },
+  "scripts": {
+    "test": "npx debris"
+  },
+  "type": "module"
+}
