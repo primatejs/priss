@@ -11,8 +11,6 @@ for (const component of await c.list(filename => filename.endsWith(".svelte"))) 
   await File.write(`${component.path}.js`, compiled);
 }
 
-
-
 export default config => async env => {
   const root = env.root.join(config.root);
   return {
@@ -41,7 +39,7 @@ export default config => async env => {
       if (await md.exists) {
         const content = marked.parse(await md.file.read());
         const {html: _html} = (await import(`${c.join("StaticPage.svelte.js")}`))
-          .default.render({content});
+          .default.render({content, toc});
         return html`${_html}`;
       }
       if (pathname.startsWith("/blog/")) {
