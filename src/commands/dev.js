@@ -1,1 +1,5 @@
-export default () => {console.log("dev")};
+import run from "primate";
+
+export default async () => {
+  await run();
+};

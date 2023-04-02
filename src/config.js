@@ -1,6 +1,11 @@
 import {Path} from "runtime-compat/fs";
 
-const name = "priss.config.js";
+const name = "primate.config.js";
 
-//export const exists = () => Path.root.join(name).exists;
-export const exists = async () => (await Path.root).join(name).exists;
+export const exists = async () => {
+  try {
+    return (await Path.root()).join(name).exists;
+  } catch (error) {
+    return false;
+  }
+};
