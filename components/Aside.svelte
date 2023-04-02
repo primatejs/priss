@@ -7,4 +7,5 @@
 {#each toc as section}
 <li>{section.text}</li>
 {/each}
+</ul>
 </aside>
