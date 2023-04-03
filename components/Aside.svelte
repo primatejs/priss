@@ -5,7 +5,9 @@
 <aside>
 <ul>
 {#each toc as section}
-<li>{section.text}</li>
+<li>
+  <a href="#{section.name}">{section.text}</a>
+</li>
 {/each}
 </ul>
 </aside>
