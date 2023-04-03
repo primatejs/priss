@@ -1,6 +1,6 @@
 {
   "name": "priss",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "bugs": "https://github.com/primatejs/priss/issues",
   "repository": "https://github.com/primatejs/priss",
   "description": "Primate + Svelte site generator",
@@ -9,7 +9,7 @@
   "dependencies": {
     "@primate/svelte": "^0.1.0",
     "marked": "^4.3.0",
-    "primate": "^0.11.0",
+    "primate": "^0.12.0",
     "runtime-compat": "^0.14.1"
   },
   "devDependencies": {
