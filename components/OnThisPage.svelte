@@ -2,7 +2,8 @@
   export let toc;
 </script>
 
-<aside>
+<aside class="on-this-page">
+<h4>On this page</h4>
 <ul>
 {#each toc as section}
 <li>

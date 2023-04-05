@@ -27,10 +27,11 @@ export default config => async env => {
           },
         };
         marked.use({renderer});
+        const app = config;
         const content = marked.parse(await md.file.read());
         const path = new Path(import.meta.url).directory.directory
           .join("components");
-        return svelte("StaticPage", {content, toc}, path);
+        return svelte("StaticPage", {content, toc, app}, path);
       }
       return next(request);
     },
