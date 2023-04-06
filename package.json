@@ -1,11 +1,11 @@
 {
   "name": "priss",
   "version": "0.3.0",
-  "bugs": "https://github.com/primatejs/priss/issues",
-  "repository": "https://github.com/primatejs/priss",
   "description": "Primate + Svelte site generator",
+  "bugs": "https://github.com/primatejs/priss/issues",
   "license": "MIT",
   "bin": "src/bin.js",
+  "repository": "https://github.com/primatejs/priss",
   "dependencies": {
     "@primate/svelte": "^0.1.2",
     "marked": "^4.3.0",
@@ -14,11 +14,7 @@
     "svelte": "^3.58.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.21.4",
-    "@babel/eslint-parser": "^7.21.3",
-    "@babel/plugin-syntax-import-assertions": "^7.20.0",
-    "eslint": "^8.37.0",
-    "eslint-plugin-json": "^3.1.0"
+    "maximin": "^0.1.2"
   },
   "type": "module",
   "exports": "./exports.js"
