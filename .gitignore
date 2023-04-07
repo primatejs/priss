@@ -3,3 +3,4 @@ package-lock.json
 *.lock
 *output
 components/*.svelte.js
+primate.config.js
