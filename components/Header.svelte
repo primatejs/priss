@@ -6,7 +6,7 @@
   const {theme} = app;
 
   const toggleColorScheme = () => {
-    console.log("toggling!");
+    document.body.classList.toggle("dark");
   }
 </script>
 <Icons />
@@ -27,9 +27,9 @@
     <a class="ic" href="https://github.com/{theme.github}">
       <Icon name="github" />
     </a>
-    <a class="ic" on:click={toggleColorScheme}>
+    <button class="ic" on:click={toggleColorScheme}>
       <Icon name="sun" />
-    </a>
+    </button>
   </ul>
 
 </header>
