@@ -4,7 +4,9 @@ import svelte from "@primate/svelte";
 
 export default config => async env => {
   const root = env.root.join(config.root);
+  const path = new Path(import.meta.url).directory.directory.join("components");
   return {
+    load: () => svelte(path),
     route: async (request, next) => {
       const {pathname} = request;
       // check if an .md file exists at this path
@@ -29,9 +31,7 @@ export default config => async env => {
         marked.use({renderer});
         const app = config;
         const content = marked.parse(await md.file.read());
-        const path = new Path(import.meta.url).directory.directory
-          .join("components");
-        return svelte("StaticPage", {content, toc, app}, path);
+        return env.handlers.svelte("StaticPage", {content, toc, app});
       }
       return next(request);
     },

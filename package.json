@@ -7,11 +7,10 @@
   "bin": "src/bin.js",
   "repository": "https://github.com/primatejs/priss",
   "dependencies": {
-    "@primate/svelte": "^0.1.2",
+    "@primate/svelte": "^0.2.0",
     "marked": "^4.3.0",
-    "primate": "^0.12.0",
-    "runtime-compat": "^0.14.1",
-    "svelte": "^3.58.0"
+    "primate": "^0.13.0",
+    "runtime-compat": "^0.14.1"
   },
   "devDependencies": {
     "maximin": "^0.1.2"
