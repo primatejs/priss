@@ -7,7 +7,7 @@
   "bin": "src/bin.js",
   "repository": "https://github.com/primatejs/priss",
   "dependencies": {
-    "@primate/svelte": "^0.4.1",
+    "@primate/svelte": "^0.4.2",
     "marked": "^4.3.0",
     "runtime-compat": "^0.14.1"
   },
@@ -15,7 +15,7 @@
     "maximin": "^0.1.2"
   },
   "peerDependencies": {
-    "primate": "0.14.0"
+    "primate": "0.14"
   },
   "type": "module",
   "exports": "./exports.js"
