@@ -1,0 +1,5 @@
+# Priss
+
+## Install
+
+`npx priss`
