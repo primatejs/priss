@@ -31,7 +31,7 @@ export default config => ({
       marked.use({renderer});
       const app = config;
       const content = marked.parse(await md.file.read());
-      return env.handlers.svelte("StaticPage", {content, toc, app});
+      return env.handlers.svelte("StaticPage.svelte", {content, toc, app});
     }
     return next({request, env});
   },
