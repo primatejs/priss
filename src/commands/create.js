@@ -15,8 +15,8 @@ const configModule = async () => {
         priss: `^${package_json.version}`,
       },
       scripts: {
-        dev: "npx priss dev",
-        build: "npx priss build",
+        dev: "npm i && npx primate",
+        serve: "npm i && npx primate serve",
       },
       type: "module",
     }, null, space);
