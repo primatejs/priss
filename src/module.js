@@ -5,7 +5,7 @@ import svelte from "@primate/svelte";
 const path = new Path(import.meta.url).directory.directory.join("components");
 export default config => ({
   load() {
-    return svelte({directory: path});
+    return svelte({directory: path, entryPoints: ["StaticPage.svelte"]});
   },
   async route({request, env}, next) {
     const {pathname} = request;
