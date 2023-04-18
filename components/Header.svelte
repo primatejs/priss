@@ -5,7 +5,10 @@
   export let app;
   const {theme} = app;
 
+  let dark = false;
+
   const toggleColorScheme = () => {
+    dark = !dark;
     document.body.classList.toggle("dark");
   }
 </script>
@@ -28,7 +31,7 @@
       <Icon name="github" />
     </a>
     <button class="ic" on:click={toggleColorScheme}>
-      <Icon name="sun" />
+      <Icon name={dark ? "sun": "moon"} />
     </button>
   </ul>
 
