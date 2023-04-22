@@ -3,9 +3,13 @@ import hljs from "highlight.js/lib/core";
 import xml from "highlight.js/lib/languages/xml";
 import javascript from "highlight.js/lib/languages/javascript";
 import bash from "highlight.js/lib/languages/bash";
+import http from "highlight.js/lib/languages/http";
+import plaintext from "highlight.js/lib/languages/plaintext";
 hljs.registerLanguage("javascript", javascript);
 hljs.registerLanguage("xml", xml);
 hljs.registerLanguage("bash", bash);
+hljs.registerLanguage("http", http);
+hljs.registerLanguage("plaintext", plaintext);
 
 import {Path} from "runtime-compat/fs";
 import svelte from "@primate/svelte";
@@ -29,7 +33,10 @@ export default config => {
   return {
     load(_app) {
       app = _app;
-      app.load(svelte({directory: path, entryPoints: ["StaticPage.svelte"]}));
+      app.load(svelte({directory: path, entryPoints: [
+        "StaticPage.svelte",
+        "Homepage.svelte",
+      ]}));
       app.load(esbuild());
     },
     async route(request, next) {
@@ -37,11 +44,14 @@ export default config => {
       const repo = `https://github.com/${config.theme.github}`;
       // check if an .md file exists at this path
       const md = app.root.join(config.root, `${pathname}.md`);
+      if (pathname === "/") {
+        return app.handlers.svelte("Homepage.svelte", {app: config});
+      }
       if (await md.exists) {
         const toc = [];
         const hooks = {
           postprocess(markdown) {
-            return markdown.replaceAll(/!!!\n(.*)\n!!!/gums, (_, p1) =>
+            return markdown.replaceAll(/!!!\n(.*?)\n!!!/gus, (_, p1) =>
               `<div class="box">${p1}</div>`);
           },
         };
@@ -55,7 +65,7 @@ export default config => {
             return `${top}<pre><code>${value}</code></pre>`;
           },
           heading(text, level) {
-            const name = text.toLowerCase().replaceAll(/[?{}]/gu, "")
+            const name = text.toLowerCase().replaceAll(/[?{}%]/gu, "")
               .replace(/[^\w]+/gu, "-");
             if (level > 1 || toc.length > 1) {
               toc.push({level, text, name});
@@ -87,7 +97,7 @@ export default config => {
         return app.handlers.svelte("StaticPage.svelte",
           {content, toc, app: config, sidebar});
       }
-      return next(request);
+      return next({...request, config});
     },
   };
 };

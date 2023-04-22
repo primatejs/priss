@@ -1,16 +1,14 @@
 <script>
+  import colorscheme from "./localStorage.js";
+
   import Icons from "./Icons.svelte";
   import Icon from "./Icon.svelte";
 
   export let app;
   const {theme} = app;
 
-  let dark = false;
-
-  const toggleColorScheme = () => {
-    dark = !dark;
-    document.body.classList.toggle("dark");
-  }
+  const toggleColorScheme = () =>
+    colorscheme.update(value => value === "dark" ? "light" : "dark");
 </script>
 <Icons />
 <header>
@@ -31,7 +29,7 @@
       <Icon name="github" />
     </a>
     <button class="ic" on:click={toggleColorScheme}>
-      <Icon name={dark ? "sun": "moon"} />
+      <Icon name={$colorscheme === "dark" ? "sun" : "moon"} />
     </button>
   </ul>
 
