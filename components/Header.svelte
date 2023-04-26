@@ -12,7 +12,10 @@
 </script>
 <Icons />
 <header>
-  <a class="home" href="/">{app.title}</a>
+  <a class="home" href="/">
+    <img src="/logo.svg" />
+    {app.title}
+  </a>
 
   <div class="search"></div>
 
