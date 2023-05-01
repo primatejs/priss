@@ -58,9 +58,9 @@ export default config => {
         const renderer = {
           code(code, infostring) {
             const [language] = infostring.split(" ");
-            const file = [...infostring
-              .matchAll(/file=(?<file>.*)/ug)][0]?.groups.file;
-            const top = file ? `<div class="filename">${file}</div>` : "";
+            const caption = [...infostring
+              .matchAll(/caption=(?<caption>.*)/ug)][0]?.groups.caption;
+            const top = caption ? `<div class="caption">${caption}</div>` : "";
             const {value} = hljs.highlight(code, {language});
             return `${top}<pre><code>${value}</code></pre>`;
           },
