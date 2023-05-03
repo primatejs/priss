@@ -1,23 +1,23 @@
 {
   "name": "priss",
-  "version": "0.8.2",
+  "version": "0.9.0",
   "description": "Primate + Svelte site generator",
   "bugs": "https://github.com/primatejs/priss/issues",
   "license": "MIT",
   "bin": "src/bin.js",
   "repository": "https://github.com/primatejs/priss",
   "dependencies": {
-    "@primate/esbuild": "^0.3.1",
-    "@primate/svelte": "^0.7.0",
+    "@primate/esbuild": "^0.4.0",
+    "@primate/svelte": "^0.8.0",
     "highlight.js": "^11.8.0",
-    "marked": "^4.3.0",
+    "marked": "^5.0.0",
     "runtime-compat": "^0.16.3"
   },
   "devDependencies": {
     "maximin": "^0.1.2"
   },
   "peerDependencies": {
-    "primate": "0.16"
+    "primate": "0.17"
   },
   "type": "module",
   "exports": "./exports.js"
