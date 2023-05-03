@@ -10,7 +10,7 @@
     "@primate/esbuild": "^0.4.0",
     "@primate/svelte": "^0.8.0",
     "highlight.js": "^11.8.0",
-    "marked": "^5.0.0",
+    "marked": "^4.3.0",
     "runtime-compat": "^0.16.3"
   },
   "devDependencies": {
