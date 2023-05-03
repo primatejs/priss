@@ -31,6 +31,7 @@ export default config => {
   let app;
 
   return {
+    name: "priss",
     load(_app) {
       app = _app;
       app.load(svelte({directory: path, entryPoints: [
