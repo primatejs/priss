@@ -15,12 +15,21 @@ import {Path} from "runtime-compat/fs";
 import svelte from "@primate/svelte";
 import esbuild from "@primate/esbuild";
 
+const encodeTitle = title => title.toLowerCase().replaceAll(" ", "-");
+
+const parseTitleObject = (section, entry) => entry.heading
+  ? entry
+  : Object.entries(entry).map(([subsection, titles]) =>
+    titles.map(title =>
+      ({title, link: `/${section}/${subsection}/${encodeTitle(title)}`})))
+    .flat();
+
 const getSidebar = (pathname, sidebar) => {
   const [, section] = pathname.split("/");
   return sidebar[section]
-    .map(title => typeof title === "string"
-      ? {title, link: `/${section}/${title.toLowerCase().replaceAll(" ", "-")}`}
-      : title)
+    .flatMap(title => typeof title === "string"
+      ? {title, link: `/${section}/${encodeTitle(title)}`}
+      : parseTitleObject(section, title))
     .map(line =>
       line.link === pathname ? {...line, current: true} : line
     );
