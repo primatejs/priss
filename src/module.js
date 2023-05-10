@@ -1,3 +1,4 @@
+import {Response} from "runtime-compat/http";
 import {marked} from "marked";
 import hljs from "highlight.js/lib/core";
 import xml from "highlight.js/lib/languages/xml";
@@ -35,6 +36,9 @@ const getSidebar = (pathname, sidebar) => {
     );
 };
 
+const respond = async (app, handler) =>
+  new Response(...await handler(app, app.generateHeaders()));
+
 const path = new Path(import.meta.url).directory.directory.join("components");
 export default config => {
   let app;
@@ -49,14 +53,16 @@ export default config => {
       ]}));
       app.load(esbuild());
     },
-    async route(request, next) {
+    async handle(request, next) {
       const {pathname} = request.url;
-      const repo = `https://github.com/${config.theme.github}`;
       // check if an .md file exists at this path
       const md = app.root.join(config.root, `${pathname}.md`);
       if (pathname === "/") {
-        return app.handlers.svelte("Homepage.svelte", {app: config});
+        return respond(app,
+          app.handlers.svelte("Homepage.svelte", {app: config}));
       }
+
+      const repo = `https://github.com/${config.theme.github}`;
       if (await md.exists) {
         const toc = [];
         const hooks = {
@@ -104,8 +110,9 @@ export default config => {
         marked.use({renderer, hooks});
         const sidebar = getSidebar(pathname, config.theme.sidebar);
         const content = marked.parse(await md.file.read());
-        return app.handlers.svelte("StaticPage.svelte",
-          {content, toc, app: config, sidebar});
+        return respond(app,
+          app.handlers.svelte("StaticPage.svelte",
+            {content, toc, app: config, sidebar}));
       }
       return next({...request, config});
     },
