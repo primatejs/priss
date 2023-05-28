@@ -1,8 +1,18 @@
 <script>
+  import {onMount} from "svelte";
   import colorscheme from "./localStorage.js";
 
   import Icons from "./Icons.svelte";
   import Icon from "./Icon.svelte";
+
+  let highlight = _ => "";
+
+  const part = link => link.split("/")[1];
+
+  onMount(() => {
+    highlight = link => part(link) === part(document.location.pathname)
+      ? "active" : "";
+  });
 
   export let app;
   const {theme} = app;
@@ -14,7 +24,6 @@
 <header>
   <a class="home" href="/">
     <img src="/logo.svg" />
-    {app.title}
   </a>
 
   <div class="search"></div>
@@ -22,24 +31,27 @@
   <ul class="navbar">
     {#each theme.navbar as {link, label}}
     <li>
-      <a href="{link}">{label}</a>
+      <a href="{link}" class="{highlight(link)}">{label}</a>
     </li>
     {/each}
 
     <div class="divider" />
 
-    <a class="ic" href="https://github.com/{theme.github}">
-      <Icon name="github" />
-    </a>
-    <a class="ic" href="https://twitter.com/{theme.twitter}">
-      <Icon name="twitter" />
-    </a>
-    <a class="ic" href="{theme.chat}">
-      <Icon name="chat" />
-    </a>
     <button class="ic" on:click={toggleColorScheme}>
       <Icon name={$colorscheme === "dark" ? "sun" : "moon"} />
     </button>
+
+    <a class="ic" href="{theme.chat}">
+      <Icon name="chat" />
+    </a>
+
+    <a class="ic" href="https://twitter.com/{theme.twitter}">
+      <Icon name="twitter" />
+    </a>
+
+    <a class="ic" href="https://github.com/{theme.github}">
+      <Icon name="github" />
+    </a>
   </ul>
 
 </header>
