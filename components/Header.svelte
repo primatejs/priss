@@ -31,6 +31,12 @@
     <a class="ic" href="https://github.com/{theme.github}">
       <Icon name="github" />
     </a>
+    <a class="ic" href="https://twitter.com/{theme.twitter}">
+      <Icon name="twitter" />
+    </a>
+    <a class="ic" href="{theme.chat}">
+      <Icon name="chat" />
+    </a>
     <button class="ic" on:click={toggleColorScheme}>
       <Icon name={$colorscheme === "dark" ? "sun" : "moon"} />
     </button>

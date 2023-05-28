@@ -28,7 +28,7 @@ const parseTitleObject = (section, entry) => entry.heading
 const getSidebar = (pathname, sidebar) => {
   const [, section] = pathname.split("/");
   return sidebar[section]
-    .flatMap(title => typeof title === "string"
+    ?.flatMap(title => typeof title === "string"
       ? {title, link: `/${section}/${encodeTitle(title)}`}
       : parseTitleObject(section, title))
     .map(line =>

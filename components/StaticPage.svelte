@@ -7,7 +7,9 @@
 </script>
 <Header {app}/>
 <main>
-<Sidebar {sidebar} />
+{#if sidebar !== undefined}
+  <Sidebar {sidebar} />
+{/if}
 <article>
 {@html content}
 </article>
