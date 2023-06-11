@@ -3,7 +3,9 @@
   import Sidebar from "./Sidebar.svelte";
   import OnThisPage from "./OnThisPage.svelte";
 
-  export let content, toc, app, sidebar;
+  export let data;
+
+  const {content, toc, app, sidebar} = data;
 </script>
 <Header {app}/>
 <main>

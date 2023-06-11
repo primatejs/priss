@@ -1,7 +1,9 @@
 <script>
   import Header from "./Header.svelte";
 
-  export let content, app;
+  export let data;
+
+  const {content, app} = data;
 </script>
 <Header {app}/>
 <main class="hero">

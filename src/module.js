@@ -36,8 +36,7 @@ const getSidebar = (pathname, sidebar) => {
     );
 };
 
-const respond = async (app, handler) =>
-  new Response(...await handler(app, app.generateHeaders()));
+const respond = async (app, handler) => new Response(...await handler(app));
 
 const path = new Path(import.meta.url).directory.directory.join("components");
 export default config => {
@@ -45,13 +44,14 @@ export default config => {
 
   return {
     name: "priss",
-    load(_app) {
+    init(_app) {
       app = _app;
-      app.load(svelte({directory: path, entryPoints: [
-        "StaticPage.svelte",
-        "Homepage.svelte",
-      ]}));
-      app.load(esbuild());
+    },
+    load() {
+      return [
+        svelte({directory: path}),
+        esbuild(),
+      ];
     },
     async handle(request, next) {
       const {pathname} = request.url;

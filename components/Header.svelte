@@ -1,15 +1,16 @@
 <script>
   import {onMount} from "svelte";
-  import colorscheme from "./localStorage.js";
 
   import Icons from "./Icons.svelte";
   import Icon from "./Icon.svelte";
 
   let highlight = _ => "";
+  let colorscheme;
 
   const part = link => link.split("/")[1];
 
-  onMount(() => {
+  onMount(async () => {
+    colorscheme = (await import("./localStorage.js")).default;
     highlight = link => part(link) === part(document.location.pathname)
       ? "active" : "";
   });
