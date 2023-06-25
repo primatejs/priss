@@ -11,8 +11,8 @@
 
   onMount(async () => {
     colorscheme = (await import("./localStorage.js")).default;
-    highlight = link => part(link) === part(document.location.pathname)
-      ? "active" : "";
+    highlight = link =>
+      part(link) === part(document.location.pathname) ? "active" : "";
   });
 
   export let app;
