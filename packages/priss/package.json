@@ -5,7 +5,11 @@
   "bugs": "https://github.com/primatejs/priss/issues",
   "license": "MIT",
   "bin": "src/bin.js",
-  "repository": "https://github.com/primatejs/priss",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/primatejs/priss",
+    "directory": "packages/priss"
+  },
   "dependencies": {
     "@primate/esbuild": "^0.8.0",
     "@primate/liveview": "^0.2.2",

@@ -2,4 +2,4 @@
 
 ## Install
 
-`npx priss`
+`npm i priss`
