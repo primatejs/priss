@@ -91,14 +91,43 @@ const getPage = async (root, config, pathname) => {
   }
 };
 
+const handleBlog = async (app, config, pathname) => {
+  if (pathname.startsWith("/blog")) {
+    const directory = app.root.join(config.root, "blog");
+    if (await directory.exists) {
+      if (pathname === "/blog") {
+        const posts = await Promise.all((await directory.collect(/^.*json$/u))
+          .map(async path => ({...await path.json(), link: path.base})));
+        return app.handlers.svelte("priss/BlogIndex.svelte", {
+          app: config,
+          posts,
+        });
+      } else {
+        const base = pathname.slice(5);
+        try {
+          const meta = await directory.join(`${base}.json`).json();
+          const {content, toc} = await getPage(app.root, config, pathname);
+          return app.handlers.svelte("priss/BlogPage.svelte", {
+            content, toc, meta, app: config,
+          });
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    }
+  }
+  return undefined;
+}
+
 const path = new Path(import.meta.url).directory.directory.join("components");
 export default config => {
-  let app$;
+  const {blog} = config;
+  let app;
 
   return {
     name: "priss",
-    async init(app) {
-      app$ = app;
+    async init(app$) {
+      app = app$;
     },
     load() {
       return [
@@ -122,11 +151,18 @@ export default config => {
     async handle(request, next) {
       const {pathname} = request.url;
 
-      const page = await getPage(app$.root, config, pathname);
+      if (blog) {
+        const handler = await handleBlog(app, config, pathname);
+        if (handler !== undefined) {
+          return handler(app, {}, request);
+        }
+      }
+
+      const page = await getPage(app.root, config, pathname);
       if (page !== undefined) {
         const {content, toc, sidebar} = page;
-        return app$.handlers.svelte("priss/StaticPage.svelte",
-          {content, toc, app: config, sidebar})(app$, {}, request);
+        return app.handlers.svelte("priss/StaticPage.svelte",
+          {content, toc, app: config, sidebar})(app, {}, request);
       }
       return next({...request, config});
     },
