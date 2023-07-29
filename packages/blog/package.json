@@ -1,0 +1,20 @@
+{
+  "name": "@priss/blog",
+  "version": "0.0.1",
+  "description": "Priss blog module",
+  "bugs": "https://github.com/primatejs/priss/issues",
+  "license": "MIT",
+  "bin": "src/bin.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/primatejs/priss",
+    "directory": "packages/blog"
+  },
+  "dependencies": {},
+  "peerDependencies": {
+    "priss": "0.17",
+    "primate": "0.21"
+  },
+  "type": "module",
+  "exports": "./exports.js"
+}
