@@ -8,6 +8,7 @@
   "repository": "https://github.com/primatejs/priss",
   "dependencies": {
     "@primate/esbuild": "^0.7.0",
+    "@primate/liveview": "^0.1.1",
     "@primate/svelte": "^0.14.0",
     "highlight.js": "^11.8.0",
     "marked": "^4.3.0",

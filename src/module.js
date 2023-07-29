@@ -1,4 +1,3 @@
-import {Response} from "runtime-compat/http";
 import {marked} from "marked";
 import hljs from "highlight.js/lib/core";
 import xml from "highlight.js/lib/languages/xml";
@@ -15,6 +14,7 @@ hljs.registerLanguage("plaintext", plaintext);
 import {Path} from "runtime-compat/fs";
 import svelte from "@primate/svelte";
 import esbuild from "@primate/esbuild";
+import liveview from "@primate/liveview";
 
 const encodeTitle = title => title.toLowerCase().replaceAll(" ", "-");
 
@@ -35,8 +35,6 @@ const getSidebar = (pathname, sidebar) => {
       line.link === pathname ? {...line, current: true} : line
     );
 };
-
-const respond = async (app, handler) => new Response(...await handler(app));
 
 const getPage = async (root, config, pathname) => {
   const md = root.join(config.root, `${pathname}.md`);
@@ -95,40 +93,40 @@ const getPage = async (root, config, pathname) => {
 
 const path = new Path(import.meta.url).directory.directory.join("components");
 export default config => {
-  let app;
+  let app$;
 
   return {
     name: "priss",
-    init(_app) {
-      app = _app;
+    async init(app) {
+      app$ = app;
     },
     load() {
       return [
-        svelte({directory: path}),
+        svelte(),
         esbuild(),
+        liveview(),
       ];
+    },
+    async compile(app, next) {
+      const build = app.build.paths;
+      await app.copy(path, build.components.join("priss"), /^.*.svelte$/u);
+      await app.copy(path, build.server.join("priss"));
+
+      return next(app);
+    },
+    async publish(app, next) {
+      const build = app.build.paths;
+      await app.copy(path, build.client.join(app.config.build.app, "priss"));
+      return next(app);
     },
     async handle(request, next) {
       const {pathname} = request.url;
 
-      if (pathname === "/") {
-        return respond(app,
-          app.handlers.svelte("Homepage.svelte", {app: config}));
-      }
-
-      if (pathname === "/static-page") {
-        const _pathname = request.url.searchParams.get("pathname");
-        const page = await getPage(app.root, config, _pathname);
-        if (page !== undefined) {
-          return respond(app, app.handlers.json({...page}));
-        }
-      }
-
-      const page = await getPage(app.root, config, pathname);
+      const page = await getPage(app$.root, config, pathname);
       if (page !== undefined) {
         const {content, toc, sidebar} = page;
-        return respond(app, app.handlers.svelte("StaticPage.svelte",
-          {content, toc, app: config, sidebar}));
+        return app$.handlers.svelte("priss/StaticPage.svelte",
+          {content, toc, app: config, sidebar})(app$, {}, request);
       }
       return next({...request, config});
     },
