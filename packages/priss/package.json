@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@primate/esbuild": "^0.8.0",
-    "@primate/liveview": "^0.2.2",
+    "@primate/liveview": "^0.2.3",
     "@primate/svelte": "^0.15.0",
     "highlight.js": "^11.8.0",
     "marked": "^4.3.0",
