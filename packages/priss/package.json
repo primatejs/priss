@@ -1,6 +1,6 @@
 {
   "name": "priss",
-  "version": "0.18.1",
+  "version": "0.18.2",
   "description": "Primate + Svelte site generator",
   "bugs": "https://github.com/primatejs/priss/issues",
   "license": "MIT",
@@ -12,8 +12,8 @@
   },
   "dependencies": {
     "@primate/esbuild": "^0.8.0",
-    "@primate/liveview": "^0.2.3",
-    "@primate/svelte": "^0.15.0",
+    "@primate/liveview": "^0.2.5",
+    "@primate/svelte": "^0.15.1",
     "highlight.js": "^11.8.0",
     "marked": "^4.3.0",
     "runtime-compat": "^0.24.1"

@@ -126,15 +126,15 @@ export default config => {
 
   return {
     name: "priss",
-    async init(app$) {
-      app = app$;
-    },
     load() {
       return [
         svelte(),
         esbuild(),
         liveview(),
       ];
+    },
+    async init(app$) {
+      app = app$;
     },
     async compile(app, next) {
       const build = app.build.paths;
