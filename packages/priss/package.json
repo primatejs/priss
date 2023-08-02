@@ -16,7 +16,7 @@
     "@primate/svelte": "^0.15.1",
     "highlight.js": "^11.8.0",
     "marked": "^4.3.0",
-    "runtime-compat": "^0.24.1"
+    "runtime-compat": "^0.25.0"
   },
   "devDependencies": {
     "maximin": "^0.1.5"
