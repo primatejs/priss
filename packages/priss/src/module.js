@@ -111,7 +111,7 @@ const handleBlog = async (app, config, pathname) => {
             content, toc, meta, app: config,
           });
         } catch (error) {
-          console.log(error);
+          // ignore the error and let Primate show an error page
         }
       }
     }
