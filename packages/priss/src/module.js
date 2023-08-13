@@ -98,6 +98,7 @@ const handleBlog = async (app, config, pathname) => {
       if (pathname === "/blog") {
         const posts = await Promise.all((await directory.collect(/^.*json$/u))
           .map(async path => ({...await path.json(), link: path.base})));
+        posts.sort((a, b) => b.epoch - a.epoch);
         return app.handlers.svelte("priss/BlogIndex.svelte", {
           app: config,
           posts,
@@ -130,7 +131,7 @@ export default config => {
       return [
         svelte(),
         esbuild(),
-        liveview(),
+        //liveview(),
       ];
     },
     async init(app$) {
