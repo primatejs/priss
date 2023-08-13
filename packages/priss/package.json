@@ -11,12 +11,12 @@
     "directory": "packages/priss"
   },
   "dependencies": {
-    "@primate/esbuild": "^0.8.0",
-    "@primate/liveview": "^0.3.3",
-    "@primate/svelte": "^0.15.2",
+    "@primate/esbuild": "^0.8.1",
+    "@primate/liveview": "^0.3.5",
+    "@primate/svelte": "^0.15.3",
     "highlight.js": "^11.8.0",
-    "marked": "^4.3.0",
-    "runtime-compat": "^0.25.0"
+    "marked": "^7.0.2",
+    "runtime-compat": "^0.25.1"
   },
   "devDependencies": {
     "maximin": "^0.1.5"
