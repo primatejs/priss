@@ -1,6 +1,6 @@
 {
   "name": "priss",
-  "version": "0.19.0",
+  "version": "0.19.3",
   "description": "Primate + Svelte site generator",
   "bugs": "https://github.com/primatejs/priss/issues",
   "license": "MIT",
