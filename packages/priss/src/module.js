@@ -2,11 +2,13 @@ import hljs from "highlight.js/lib/core";
 
 import xml from "highlight.js/lib/languages/xml";
 import javascript from "highlight.js/lib/languages/javascript";
+import json from "highlight.js/lib/languages/json";
 import bash from "highlight.js/lib/languages/bash";
 import http from "highlight.js/lib/languages/http";
 import plaintext from "highlight.js/lib/languages/plaintext";
 import md from "highlight.js/lib/languages/markdown";
 hljs.registerLanguage("javascript", javascript);
+hljs.registerLanguage("json", json);
 hljs.registerLanguage("xml", xml);
 hljs.registerLanguage("bash", bash);
 hljs.registerLanguage("http", http);
