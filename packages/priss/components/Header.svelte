@@ -47,8 +47,8 @@
       <Icon name="chat" />
     </a>
 
-    <a class="ic" href="https://x.com/{theme.x}">
-      <Icon name="x" />
+    <a class="ic" href="https://twitter.com/{theme.twitter}">
+      <Icon name="twitter" />
     </a>
 
     <a class="ic" href="https://github.com/{theme.github}">
