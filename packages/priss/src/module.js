@@ -97,7 +97,9 @@ export default config => {
     load() {
       return [
         svelte(),
-        esbuild(),
+        esbuild({
+          ignores: ["woff2", "jpg"],
+        }),
         liveview(),
         markdown({
           directory: config.root,
