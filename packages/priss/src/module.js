@@ -7,6 +7,7 @@ import bash from "highlight.js/lib/languages/bash";
 import http from "highlight.js/lib/languages/http";
 import plaintext from "highlight.js/lib/languages/plaintext";
 import md from "highlight.js/lib/languages/markdown";
+import handlebars from "highlight.js/lib/languages/handlebars";
 hljs.registerLanguage("javascript", javascript);
 hljs.registerLanguage("json", json);
 hljs.registerLanguage("xml", xml);
@@ -14,12 +15,12 @@ hljs.registerLanguage("bash", bash);
 hljs.registerLanguage("http", http);
 hljs.registerLanguage("plaintext", plaintext);
 hljs.registerLanguage("md", md);
+hljs.registerLanguage("hbs", handlebars);
 
 import {Path} from "runtime-compat/fs";
-import svelte from "@primate/svelte";
 import esbuild from "@primate/esbuild";
 import liveview from "@primate/liveview";
-import markdown from "@primate/markdown";
+import {svelte, markdown} from "@primate/frontend";
 
 const encodeTitle = title => title.toLowerCase().replaceAll(" ", "-");
 
