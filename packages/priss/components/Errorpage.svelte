@@ -2,14 +2,13 @@
   import {onMount} from "svelte";
   import Header from "./Header.svelte";
 
-  export let data;
+  export let app;
   let location = "";
 
   onMount(() => {
     location = window.location.pathname;
   });
 
-  const {app} = data;
 </script>
 <Header {app}/>
 <main>
