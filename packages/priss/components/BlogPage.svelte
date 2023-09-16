@@ -10,7 +10,7 @@
   const {author, epoch, title} = meta;
 
 </script>
-<Header {app}/>
+<Header {app} {title} />
 <main>
   <article>
   <h1>{title}</h1>

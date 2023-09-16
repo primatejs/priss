@@ -3,7 +3,7 @@
 
   export let content, app;
 </script>
-<Header {app}/>
+<Header {app} title="Expressive, minimal and extensible web framework" />
 <main class="hero">
   <article>
     <img src="/logo.svg" />

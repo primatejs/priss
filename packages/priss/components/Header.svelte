@@ -15,12 +15,15 @@
       part(link) === part(document.location.pathname) ? "active" : "";
   });
 
-  export let app;
+  export let app, title;
   const {theme} = app;
 
   const toggleColorScheme = () =>
     colorscheme.update(value => value === "dark" ? "light" : "dark");
 </script>
+<svelte:head>
+  <title>Primate - {title}</title>
+</svelte:head>
 <Icons />
 <header>
   <a class="home" href="/">

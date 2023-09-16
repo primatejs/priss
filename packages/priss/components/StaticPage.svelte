@@ -4,8 +4,10 @@
   import OnThisPage from "./OnThisPage.svelte";
 
   export let content, toc, app, sidebar;
+
+  const [{text: title}] = toc;
 </script>
-<Header {app}/>
+<Header {app} {title} />
 <main>
 {#if sidebar !== undefined}
   <Sidebar {sidebar} />

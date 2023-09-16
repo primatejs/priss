@@ -10,7 +10,7 @@
   });
 
 </script>
-<Header {app}/>
+<Header {app} title="Page not found" />
 <main>
 <article>
   <h1>Page not found</h1>

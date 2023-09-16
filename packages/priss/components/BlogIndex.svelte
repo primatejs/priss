@@ -7,7 +7,7 @@
   const date = epoch => new Date(epoch).toLocaleDateString("en-AU", format);
 
 </script>
-<Header {app}/>
+<Header {app} title="Blog" />
 <main>
 <article>
   <h1>Blog</h1>
