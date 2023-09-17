@@ -14,8 +14,8 @@
     "lint": "npx eslint ."
   },
   "devDependencies": {
-    "debris": "^0.13.1",
-    "maximin": "^0.1.8"
+    "debris": "^0.14.0",
+    "maximin": "^0.1.9"
   },
   "type": "module",
   "private": true
