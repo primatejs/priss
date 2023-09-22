@@ -22,27 +22,27 @@ import esbuild from "@primate/esbuild";
 import liveview from "@primate/liveview";
 import {svelte, markdown} from "@primate/frontend";
 
-const encodeTitle = title => title.toLowerCase().replaceAll(" ", "-");
+const encode_title = title => title.toLowerCase().replaceAll(" ", "-");
 
-const parseTitleObject = (section, entry) => entry.heading
+const parse_title_object = (section, entry) => entry.heading
   ? entry
   : Object.entries(entry).map(([subsection, titles]) =>
     titles.map(title =>
-      ({title, link: `/${section}/${subsection}/${encodeTitle(title)}`})))
+      ({title, link: `/${section}/${subsection}/${encode_title(title)}`})))
     .flat();
 
-const getSidebar = (pathname, sidebar) => {
+const get_sidebar = (pathname, sidebar) => {
   const [, section] = pathname.split("/");
   return sidebar[section]
     ?.flatMap(title => typeof title === "string"
-      ? {title, link: `/${section}/${encodeTitle(title)}`}
-      : parseTitleObject(section, title))
+      ? {title, link: `/${section}/${encode_title(title)}`}
+      : parse_title_object(section, title))
     .map(line =>
       line.link === pathname ? {...line, current: true} : line
     );
 };
 
-const getPage = async (env, config, pathname) => {
+const get_page = async (env, config, pathname) => {
   const {location} = env.config;
   const base = env.runpath(location.server, config.root);
   const html = await base.join(`${pathname}.md.html`);
@@ -55,11 +55,22 @@ const getPage = async (env, config, pathname) => {
   const content = (await html.text())
     .replace("%REPO%", repo)
     .replace("%PATHNAME%", pathname);
-  const sidebar = getSidebar(pathname, config.theme.sidebar);
-  return {content, toc: await toc.json(), sidebar};
+  const sidebar = get_sidebar(pathname, config.theme.sidebar);
+  const positions = sidebar.map((page, i) => ({...page, i}));
+  const headings = positions.filter(page => page.title === undefined);
+  const position = positions.findIndex(page => page.link === pathname);
+  const {heading} = headings.findLast(({i}) => position > i);
+  const pages = sidebar.filter(page => page.title !== undefined);
+  const i = pages.findIndex(page => page.link === pathname);
+  const page = {
+    previous: i > 0 ? pages[i - 1] : undefined,
+    next: i < pages.length - 1 ? pages[i + 1] : undefined,
+    heading,
+  };
+  return {content, toc: await toc.json(), sidebar, page};
 };
 
-const handleBlog = async (env, config, pathname) => {
+const handle_blog = async (env, config, pathname) => {
   if (pathname.startsWith("/blog")) {
     const directory = env.root.join(config.root, "blog");
     if (await directory.exists) {
@@ -75,7 +86,7 @@ const handleBlog = async (env, config, pathname) => {
       const base = pathname.slice(5);
       try {
         const meta = await directory.join(`${base}.json`).json();
-        const {content, toc} = await getPage(env, config, pathname);
+        const {content, toc} = await get_page(env, config, pathname);
         return env.handlers.svelte("priss/BlogPage.svelte", {
           content, toc, meta, app: config,
         });
@@ -171,17 +182,16 @@ export default config => {
       const {pathname} = request.url;
 
       if (blog) {
-        const handler = await handleBlog(env, config, pathname);
+        const handler = await handle_blog(env, config, pathname);
         if (handler !== undefined) {
           return handler(env, {}, request);
         }
       }
 
-      const page = await getPage(env, config, pathname);
+      const page = await get_page(env, config, pathname);
       if (page !== undefined) {
-        const {content, toc, sidebar} = page;
         return env.handlers.svelte("priss/StaticPage.svelte",
-          {content, toc, app: config, sidebar})(env, {}, request);
+          {...page, app: config})(env, {}, request);
       }
       return next({...request, config});
     },
