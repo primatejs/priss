@@ -56,6 +56,10 @@ const get_page = async (env, config, pathname) => {
     .replace("%REPO%", repo)
     .replace("%PATHNAME%", pathname);
   const sidebar = get_sidebar(pathname, config.theme.sidebar);
+  if (sidebar === undefined) {
+    return {content, toc: await toc.json(), sidebar};
+  }
+
   const positions = sidebar.map((page, i) => ({...page, i}));
   const headings = positions.filter(page => page.title === undefined);
   const position = positions.findIndex(page => page.link === pathname);
