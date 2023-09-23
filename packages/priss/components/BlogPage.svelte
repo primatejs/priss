@@ -12,7 +12,7 @@
 </script>
 <Header {app} {title} />
 <main>
-  <article>
+  <article class="blog">
   <h1>{title}</h1>
   <div class="blog-metadata">
     <svg class="icon" width="16" height="16">
