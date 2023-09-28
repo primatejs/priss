@@ -143,7 +143,7 @@ export default config => {
                     <svg class="icon" width="16" height="16">
                       <use xlink:href="#edit" />
                     </svg>
-                    Edit this page
+                    Edit this page on GitHub
                   </a>
                 `;
 
