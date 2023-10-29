@@ -1,6 +1,6 @@
 {
   "name": "priss",
-  "version": "0.22.4",
+  "version": "0.23.0",
   "description": "Primate + Svelte site generator",
   "bugs": "https://github.com/primatejs/priss/issues",
   "license": "MIT",
@@ -21,7 +21,7 @@
     "maximin": "^0.2.2"
   },
   "peerDependencies": {
-    "primate": "0.24"
+    "primate": "0.25"
   },
   "type": "module",
   "exports": "./exports.js"
